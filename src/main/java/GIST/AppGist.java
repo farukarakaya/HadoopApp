@@ -11,11 +11,25 @@ import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.feature.global.Gist;
 
 public class AppGist {
+    /**
+     * similarity method
+     *
+     * @param gist1
+     * @param gist2
+     * compare gist vectors by euclidean distance metric
+     */
+    public static double sim(float[] gist1,float[] gist2){
+        if (gist1.length != gist2.length)
+            throw new IllegalArgumentException("Vectors have differing lengths");
+        double distance = 0;
 
-    public static double sim(FImage queryImage,FImage targetImage){
-        double sim = 0.0;
-        return sim;
+        for (int i=0; i<gist1.length; i++) {
+            double diff = (gist1[i] - gist2[i]);
+            distance += (diff * diff);
+        }
+        return 1-distance;
     }
+
     /**
      * Main method
      *
