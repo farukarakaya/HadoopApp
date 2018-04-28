@@ -1,7 +1,11 @@
 package GIST;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
+import java.nio.file.Files;
 
 import org.openimaj.feature.FloatFV;
 import org.openimaj.feature.FloatFVComparison;
@@ -38,11 +42,15 @@ public class AppGist {
      */
     public static void main(String[] args) throws IOException {
         FImage i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13,i14,i15;
-        //i1 = ImageUtilities.readF(new URL("https://pbs.twimg.com/profile_images/594201934434836482/MiBIp9ny_400x400.jpg"));
+        //i1 = ImageUtilities.readF(new URL("https://pbs.twimg.com/profile_images/594201934434836482/MiBIp9ny_400x400.jpg"));4
+        File g1,g2;
+        g1 = new File("0.dat");
+        g1 = new File("1.dat");
+
         i2 = ImageUtilities.readF(new URL("https://preview.ibb.co/hio03c/796px_Inside_a_wild_type_banana.jpg"));
 
         i3 = ImageUtilities.readF(new URL("https://image.ibb.co/ieFcGx/elma.jpg"));
-        i4 = ImageUtilities.readF(new URL("https://image.ibb.co/gyK7ic/knowledge_graph_logo.png"));//apple gray
+        /*i4 = ImageUtilities.readF(new URL("https://image.ibb.co/gyK7ic/knowledge_graph_logo.png"));//apple gray
         i5 = ImageUtilities.readF(new URL("https://preview.ibb.co/iJfDOc/unnamed.jpg"));//apple black
         i6 = ImageUtilities.readF(new URL("https://preview.ibb.co/kNzUwx/colorful.jpg"));//apple colorful
 
@@ -53,18 +61,31 @@ public class AppGist {
         i12 = ImageUtilities.readF(new URL("https://image.ibb.co/gGMruH/lebron.png"));//lebron
         i13 = ImageUtilities.readF(new URL("https://image.ibb.co/fNrPEH/lance_stephenson_1.jpg"));//stephenson
         i14 = ImageUtilities.readF(new URL("https://image.ibb.co/nGsjgx/i.png"));//lebron2
-        i15 = ImageUtilities.readF(new URL("https://image.ibb.co/hj76uH/dragic.png"));//dragic
-        Gist fsg = new Gist(256, 256);
+        i15 = ImageUtilities.readF(new URL("https://image.ibb.co/hj76uH/dragic.png"));//dragic*/
+
+        //Gist fsg = new Gist(256, 256);
 
 
-        fsg.analyseImage(i2);
-        FloatFV f2 = fsg.getResponse();
+        //fsg.analyseImage(i2);
+        //FloatFV f2 = GISTReader.readFvecs(g1);
 
+
+        /*System.out.println(f2);
+        Writer wr = new FileWriter("gist.txt");
+        wr.write(f2.toString());
+        wr.flush();
+        wr.close();
         fsg.analyseImage(i3);
         FloatFV f3 = fsg.getResponse();
+        wr = new FileWriter("gist2.txt");
+        wr.write(f3.toString());
+        wr.flush();
+        wr.close();
+        fsg.analyseImage(f2);
+        FloatFV f2 = fsg.getResponse();
 
-        fsg.analyseImage(i4);
-        FloatFV f4 = fsg.getResponse();
+        fsg.analyseImage(f3);
+        FloatFV f3 = fsg.getResponse();
 
         fsg.analyseImage(i5);
         FloatFV f5 = fsg.getResponse();
@@ -115,7 +136,7 @@ public class AppGist {
         System.out.println("lebron - stepehson similarity: " + (1- d10) );
         System.out.println("lebron - lebron 2 similarity: " + (1- d11) );
         System.out.println("lebron - dragic similarity: " + (1- d12) );
-        System.out.println("stepehenson - dragic similarity: " + (1- d13) );
+        System.out.println("stepehenson - dragic similarity: " + (1- d13) );*/
 
     }
 }

@@ -30,14 +30,13 @@ public class SIFTMatcher {
     }
 
     public static class IntSumReducer
-            extends Reducer<IntWritable,Text,Text,IntWritable> {
+            extends Reducer<IntWritable,Text,StringTokenizer,IntWritable> {
         private IntWritable similarity = new IntWritable();
-        private Text ImageID;
+        StringTokenizer ImageID;
         public void reduce(Text key, Iterable<IntWritable> values,
                            Context context
         ) throws IOException, InterruptedException {
-
-
+            ImageID= new StringTokenizer(key.toString());
             similarity.set(1);
             context.write(ImageID, similarity);
         }
@@ -45,7 +44,7 @@ public class SIFTMatcher {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "Matcher");
         job.setJarByClass(WordCount.class);
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(IntSumReducer.class);
