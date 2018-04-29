@@ -1,7 +1,6 @@
 package GIST;
 
 import org.openimaj.ml.clustering.FloatCentroidsResult;
-
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -11,8 +10,8 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class GISTReader {
-    public static float[] getFloatArr(Path path){
-        byte[] bytes =Files.readAllBytes(path);
+    public static float[] getFloatArray(byte[] bytesi){
+        byte[] bytes = bytesi;
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         float[] fl = new float[480];
