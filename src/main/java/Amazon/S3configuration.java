@@ -25,7 +25,8 @@ public class S3configuration {
 
     public static byte[] getGist(String key) throws IOException{
         byte[] bytes = new byte[1920];
-        InputStream in = s3client.getObject("com-rosettahub-default-omerfaruk.karakaya", key).getObjectContent();
+        //System.out.println(key);
+        InputStream in = s3client.getObject("gist-karakaya-bucket", key).getObjectContent();
         in.read(bytes);
         return bytes;
     }

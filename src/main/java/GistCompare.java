@@ -1,4 +1,4 @@
-import CustomWritables.FloatArrayPairWritable;
+import CustomWritables.FloatArrayWritable;
 import GIST.*;
 import Amazon.*;
 import org.apache.hadoop.conf.Configuration;
@@ -18,9 +18,9 @@ import java.util.StringTokenizer;
 public class GistCompare {
 
     public static class GistMapper
-            extends Mapper<Object, Text, IntWritable, FloatArrayPairWritable> {
+            extends Mapper<Object, Text, IntWritable, FloatArrayWritable> {
         String link;
-        String input="https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/features_gist/2/20000.dat";
+        String input="features_gist/2/20000.dat";
         private int counter = 0;
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
@@ -30,24 +30,33 @@ public class GistCompare {
                 link =itr.nextToken();
                 IntWritable keyout = new IntWritable((counter)%10);
                 counter++;
+                System.out.println(link);
                 byte[] bytes2 = S3configuration.getGist(link);
+                System.out.println("sa girdim");
                 byte[] bytes1 = S3configuration.getGist(input);
-                FloatArrayPairWritable gist_array= new FloatArrayPairWritable(GISTReader.getFloatArray(bytes1),GISTReader.getFloatArray(bytes2));
-                context.write(keyout,gist_array);
+                float[] concated_gists = new float[960];
+                System.arraycopy(GISTReader.getFloatArray(bytes1),0,concated_gists,0,480);
+                System.arraycopy(GISTReader.getFloatArray(bytes2),0,concated_gists,480,480);
+                FloatArrayWritable mapper_out = new FloatArrayWritable(concated_gists);
+                context.write(keyout,mapper_out);
             }
         }
     }
 
     public static class GistReducer
-            extends Reducer<IntWritable,FloatArrayPairWritable,IntWritable,DoubleWritable> {
+            extends Reducer<IntWritable,FloatArrayWritable,IntWritable,DoubleWritable> {
         private DoubleWritable result = new DoubleWritable();
 
-        public void reduce(IntWritable key, Iterable<FloatArrayPairWritable> values,
+        public void reduce(IntWritable key, Iterable<FloatArrayWritable> values,
                            Context context
         ) throws IOException, InterruptedException {
             int sum = 0;
-            for (FloatArrayPairWritable val : values) {
-                result.set(AppGist.sim(val.getPair1().getArray(),val.getPair2().getArray()));
+            for (FloatArrayWritable val : values) {
+                float[] pair1 = new float[480];
+                float[] pair2 = new float[480];
+                System.arraycopy(val.getArray(),0,pair1,0,480);
+                System.arraycopy(val.getArray(),480,pair1,0,480);
+                result.set(AppGist.sim(pair1,pair2));
                 context.write(key, result);
             }
         }
@@ -57,8 +66,10 @@ public class GistCompare {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "Gist");
         job.setJarByClass(GistCompare.class);
-        job.setMapperClass(GistMapper.class);;
+        job.setMapperClass(GistMapper.class);
         job.setReducerClass(GistReducer.class);
+        job.setMapOutputKeyClass(IntWritable.class);
+        job.setMapOutputValueClass(FloatArrayWritable.class);
         job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
