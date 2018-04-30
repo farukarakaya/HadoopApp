@@ -1,6 +1,5 @@
 package GIST;
 
-import org.openimaj.ml.clustering.FloatCentroidsResult;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

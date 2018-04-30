@@ -15,18 +15,17 @@ import java.io.InputStream;
 public class S3configuration {
 
     static AWSCredentials credentials = new BasicAWSCredentials(
-            "<AWS accesskey>",
-            "<AWS secretkey>"
+            "AKIAJ3K2RVESIOJZNW3Q",
+            "9P0veFKeNJveVzHxto/D9096uY8xTwxYLwJJl8ve"
     );
     static AmazonS3 s3client = AmazonS3ClientBuilder
             .standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion(Regions.US_EAST_2)
             .build();
 
     public static byte[] getGist(String key) throws IOException{
         byte[] bytes = new byte[1920];
-        InputStream in = s3client.getObject("bucketName", key).getObjectContent();
+        InputStream in = s3client.getObject("com-rosettahub-default-omerfaruk.karakaya", key).getObjectContent();
         in.read(bytes);
         return bytes;
     }

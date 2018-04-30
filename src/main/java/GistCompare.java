@@ -20,7 +20,7 @@ public class GistCompare {
     public static class GistMapper
             extends Mapper<Object, Text, IntWritable, FloatArrayPairWritable> {
         String link;
-        String input;
+        String input="https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/features_gist/2/20000.dat";
         private int counter = 0;
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
