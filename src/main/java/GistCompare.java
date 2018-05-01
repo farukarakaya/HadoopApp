@@ -59,7 +59,7 @@ public class GistCompare {
                 float[] pair1 = new float[480];
                 float[] pair2 = new float[480];
                 System.arraycopy(val.getArray(),0,pair1,0,480);
-                System.arraycopy(val.getArray(),480,pair1,0,480);
+                System.arraycopy(val.getArray(),480,pair2,0,480);
                 result.set(AppGist.sim(pair1,pair2));
                 outkey = new IntWritable((int) val.getArray()[960]);
                 System.out.println("key= " + outkey + "value= "+ result);
