@@ -13,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class GistCompare {
@@ -36,8 +37,8 @@ public class GistCompare {
                 IntWritable keyout = new IntWritable((counter)%10);
                 counter++;
                 System.out.println(link);
-                byte[] bytes2 = S3configuration.getGist(link);
-                byte[] bytes1 = S3configuration.getGist(input);
+                byte[] bytes2 = S3configuration.getGist(link, "gist-karakaya-bucket");
+                byte[] bytes1 = S3configuration.getGist(input, "gist-karakaya-bucket");
                 float[] concated_gists = new float[961];
                 System.arraycopy(GISTReader.getFloatArray(bytes1),0,concated_gists,0,480);
                 System.arraycopy(GISTReader.getFloatArray(bytes2),0,concated_gists,480,480);
@@ -87,6 +88,15 @@ public class GistCompare {
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        int exitCode = job.waitForCompletion(true) ? 0 : 1;
+        // Do combining
+        ArrayList<String> objectList = S3configuration.getObjectList("com-rosettahub-default-omerfaruk.karakaya");
+        boolean check = S3configuration.uploadCombinedResults(objectList, "com-rosettahub-default-omerfaruk.karakaya");
+        if (check) {
+            System.out.println("Nailed it!");
+        } else {
+            System.out.println("Haydaaa... :(");
+        }
+        System.exit(exitCode);
     }
 }
