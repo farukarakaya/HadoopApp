@@ -35,46 +35,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>nearest-neighbour</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.11.163</version>
         </dependency>
         <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>klt-tracker</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>faces</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>image-annotation</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>image-feature-extraction</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>image-local-features</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openimaj</groupId>
-            <artifactId>image-processing</artifactId>
-            <version>${openimaj.version}</version>
-            <scope>compile</scope>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.163</version>
         </dependency>
     </dependencies>
 
