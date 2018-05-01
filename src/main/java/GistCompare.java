@@ -16,13 +16,19 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class GistCompare {
-    public static String input="features_gist/2/20000.dat";
-    public static class GistMapper
-            extends Mapper<Object, Text, IntWritable, FloatArrayWritable> {
+
+    public static class GistMapper extends Mapper<Object, Text, IntWritable, FloatArrayWritable> {
         String link;
         private int counter = 0;
-        public void map(Object key, Text value, Context context
-        ) throws IOException, InterruptedException {
+        private String input;
+
+        @Override
+        protected void setup(Mapper.Context context) throws IOException, InterruptedException {
+            input = context.getConfiguration().get("userInputLink");
+          //  input = "features_gist/2/20000.dat";
+        }
+
+        public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
             System.out.println(input);
             StringTokenizer itr = new StringTokenizer(value.toString());
             while (itr.hasMoreTokens()) {
@@ -70,6 +76,7 @@ public class GistCompare {
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
+        conf.set("userInputLink", ("features_gist/" + args[2] + ".dat") );
         Job job = Job.getInstance(conf, "Gist");
         job.setJarByClass(GistCompare.class);
         job.setMapperClass(GistMapper.class);
@@ -80,7 +87,6 @@ public class GistCompare {
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        input = "features_gist/2/" + args[2] + ".dat";
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
