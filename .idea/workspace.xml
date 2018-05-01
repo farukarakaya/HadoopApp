@@ -36,7 +36,7 @@
       <file leaf-file-name="GistCompare.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/GistCompare.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-989">
+            <state relative-caret-position="-918">
               <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
@@ -113,7 +113,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="170" />
     <option name="y" value="50" />
     <option name="width" value="3500" />
@@ -274,16 +274,15 @@
       <option name="presentableId" value="Default" />
       <updated>1524923057098</updated>
       <workItem from="1524923058285" duration="13384000" />
-      <workItem from="1525185955603" duration="2126000" />
+      <workItem from="1525185955603" duration="2562000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15510000" />
+    <option name="totallyTimeSpent" value="15946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -293,11 +292,11 @@
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="3" visible="true" weight="0.20819779" />
+      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.20819779" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32911393" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.1584022" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3815427" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3292011" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24983734" />
@@ -437,7 +436,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GistCompare.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-989">
+        <state relative-caret-position="-918">
           <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
