@@ -41,7 +41,7 @@ public class S3configuration {
         List<S3ObjectSummary> objects = result.getObjectSummaries();
         for (S3ObjectSummary os: objects) {
             String str = os.getKey();
-            if ( str.contains("tmp/input/TestCase/output/part"))
+            if ( str.contains("MapReduce/output/part"))
                 resultList.add(str);
         }
         return resultList;
@@ -50,9 +50,10 @@ public class S3configuration {
 
     public static boolean uploadCombinedResults(ArrayList<String> allLines, String bucketName) {
         try {
+            ArrayList<String> ThresholdedOnes = new ArrayList<String>();
             File dir = new File(".");
             dir.mkdirs();
-            File tmp = new File(dir, "batchResult.txt");
+            File tmp = new File(dir, "BatchResult.txt");
             boolean isCreated = tmp.createNewFile();
             if ( isCreated ) {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(tmp.getPath(), true));
@@ -63,13 +64,29 @@ public class S3configuration {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     String line;
                     while ((line = reader.readLine()) != null) {
+                        String[] arr = line.split(" ");
+                        if ( Float.parseFloat(arr[1]) >= 0.9 ) {
+                            ThresholdedOnes.add(line);
+                        }
                         line += "\n";
                         writer.append(  line );
                     }
                     allLines.remove(allLines.size()-1);
                 }
                 writer.close();
-                s3client.putObject(bucketName, "Results/batchResult.txt", tmp);
+
+                File tmpFile = new File(dir, "ThresholdedResults.txt");
+                isCreated = tmpFile.createNewFile();
+                if (isCreated) {
+                    writer = new BufferedWriter(new FileWriter(tmpFile.getPath(), true));
+                    for (int f = 0; f < ThresholdedOnes.size(); f++) {
+                        String tstr = ThresholdedOnes.get(f) + "\n";
+                        writer.append( tstr );
+                    }
+                    writer.close();
+                    s3client.putObject(bucketName, "Results/ThresholdedResults.txt", tmpFile);
+                }
+                s3client.putObject(bucketName, "Results/BatchResult.txt", tmp);
                 return true;
             }
         } catch (Exception e ) {

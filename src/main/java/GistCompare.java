@@ -22,10 +22,11 @@ public class GistCompare {
         String link;
         private int counter = 0;
         private String input;
-
+        private int GroupCount = 10;
         @Override
         protected void setup(Mapper.Context context) throws IOException, InterruptedException {
             input = context.getConfiguration().get("userInputLink");
+            GroupCount = Integer.parseInt(context.getConfiguration().get("groupCount"));
           //  input = "features_gist/2/20000.dat";
         }
 
@@ -34,7 +35,7 @@ public class GistCompare {
             StringTokenizer itr = new StringTokenizer(value.toString());
             while (itr.hasMoreTokens()) {
                 link =itr.nextToken();
-                IntWritable keyout = new IntWritable((counter)%10);
+                IntWritable keyout = new IntWritable((counter)%GroupCount);
                 counter++;
                 System.out.println(link);
                 byte[] bytes2 = S3configuration.getGist(link, "gist-karakaya-bucket");
@@ -75,9 +76,15 @@ public class GistCompare {
         }
     }
 
+    // Arg 0 -> Input loc
+    // Arg 1 -> Output loc
+    // Arg 2 -> x/xxxx.dat file as input
+    // Arg 3 -> Group Size
+    // Arg 4 -> Result bucket name
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.set("userInputLink", ("features_gist/" + args[2] + ".dat") );
+        conf.set("groupCount", args[3]);
         Job job = Job.getInstance(conf, "Gist");
         job.setJarByClass(GistCompare.class);
         job.setMapperClass(GistMapper.class);
@@ -90,8 +97,9 @@ public class GistCompare {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
         int exitCode = job.waitForCompletion(true) ? 0 : 1;
         // Do combining
-        ArrayList<String> objectList = S3configuration.getObjectList("com-rosettahub-default-omerfaruk.karakaya");
-        boolean check = S3configuration.uploadCombinedResults(objectList, "com-rosettahub-default-omerfaruk.karakaya");
+        String bucketNameArg = args[4];
+        ArrayList<String> objectList = S3configuration.getObjectList(bucketNameArg);
+        boolean check = S3configuration.uploadCombinedResults(objectList, bucketNameArg);
         if (check) {
             System.out.println("Nailed it!");
         } else {
