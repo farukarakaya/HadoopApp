@@ -18,18 +18,29 @@ import java.util.List;
 public class S3configuration {
 
     static AWSCredentials credentials = new BasicAWSCredentials(
-            "AKIAJ3K2RVESIOJZNW3Q",
-            "9P0veFKeNJveVzHxto/D9096uY8xTwxYLwJJl8ve"
+            "AKIAI7Z3XZ6CJUU7P2PA",
+            "v7PcCzDvSxJGtMr+xX73ysBqXMeLGSW/1+vubQWY"
     );
     static AmazonS3 s3client = AmazonS3ClientBuilder
             .standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
             .build();
 
+    static AWSCredentials credentials2 = new BasicAWSCredentials(
+            "AKIAJ3K2RVESIOJZNW3Q",
+            "9P0veFKeNJveVzHxto/D9096uY8xTwxYLwJJl8ve"
+    );
+    static AmazonS3 s3client2 = AmazonS3ClientBuilder
+            .standard()
+            .withCredentials(new AWSStaticCredentialsProvider(credentials2))
+            .build();
+
     public static byte[] getGist(String key, String bucketName) throws IOException{
         byte[] bytes = new byte[1920];
         //System.out.println(key);
-        InputStream in = s3client.getObject( bucketName , key).getObjectContent();
+        String newKey = key;
+        newKey = newKey.replace("https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/features_gist/","");
+        InputStream in = s3client2.getObject( bucketName , newKey).getObjectContent();
         in.read(bytes);
         in.close();
         return bytes;
