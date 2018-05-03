@@ -1,4 +1,6 @@
+/*
 package OpenImaj;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -41,17 +43,9 @@ import org.openimaj.util.pair.IntFloatPair;
 
 import de.bwaldvogel.liblinear.SolverType;
 
-/**
- * OpenIMAJ Hello world!
- *
- */
+
 public class ImageClassifier {
-    /**
-     * Main method
-     *
-     * @param args
-     * @throws IOException
-     */
+
     public static void main(String[] args) throws IOException {
         System.out.println("Load dataset and take a sample");
         final GroupedDataset<String, VFSListDataset<Record<FImage>>, Record<FImage>> allData = Caltech101
@@ -141,4 +135,4 @@ public class ImageClassifier {
 
         return result.defaultHardAssigner();
     }
-}
+}*/
