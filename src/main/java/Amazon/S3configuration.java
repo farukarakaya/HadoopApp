@@ -38,9 +38,9 @@ public class S3configuration {
     public static byte[] getGist(String key, String bucketName) throws IOException{
         byte[] bytes = new byte[1920];
         //System.out.println(key);
-        String newKey = key;
-        newKey = newKey.replace("https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/features_gist/","");
-        InputStream in = s3client2.getObject( bucketName , newKey).getObjectContent();
+        //String newKey = key;
+        //newKey = newKey.replace("https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/","");
+        InputStream in = s3client2.getObject( bucketName , key).getObjectContent();
         in.read(bytes);
         in.close();
         return bytes;
@@ -61,7 +61,7 @@ public class S3configuration {
 
     public static boolean uploadCombinedResults(ArrayList<String> allLines, String bucketName) {
         try {
-            ArrayList<String> ThresholdedOnes = new ArrayList<String>();
+           // ArrayList<String> ThresholdedOnes = new ArrayList<String>();
             File dir = new File(".");
             dir.mkdirs();
             File tmp = new File(dir, "BatchResult.txt");
@@ -75,17 +75,19 @@ public class S3configuration {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     String line;
                     while ((line = reader.readLine()) != null) {
+                        /*
                         String[] arr = line.split(" ");
                         if ( Float.parseFloat(arr[1]) >= 0.9 ) {
                             ThresholdedOnes.add(line);
                         }
+                        */
                         line += "\n";
                         writer.append(  line );
                     }
                     allLines.remove(allLines.size()-1);
                 }
                 writer.close();
-
+                /*
                 File tmpFile = new File(dir, "ThresholdedResults.txt");
                 isCreated = tmpFile.createNewFile();
                 if (isCreated) {
@@ -97,6 +99,7 @@ public class S3configuration {
                     writer.close();
                     s3client.putObject(bucketName, "Results/ThresholdedResults.txt", tmpFile);
                 }
+                */
                 s3client.putObject(bucketName, "Results/BatchResult.txt", tmp);
                 return true;
             }

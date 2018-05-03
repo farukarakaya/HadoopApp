@@ -35,6 +35,7 @@ public class GistCompare {
             StringTokenizer itr = new StringTokenizer(value.toString());
             while (itr.hasMoreTokens()) {
                 link =itr.nextToken();
+                link = link.replace("https://s3-eu-west-1.amazonaws.com/gist-karakaya-bucket/","");
                 IntWritable keyout = new IntWritable((counter)%GroupCount);
                 counter++;
                 System.out.println(link);
@@ -68,17 +69,20 @@ public class GistCompare {
                 float[] pair2 = new float[480];
                 System.arraycopy(val.getArray(),0,pair1,0,480);
                 System.arraycopy(val.getArray(),480,pair2,0,480);
-                result.set(AppGist.sim(pair1,pair2));
-                outkey = new IntWritable((int) val.getArray()[960]);
-                System.out.println("key= " + outkey + "value= "+ result);
-                context.write(outkey, result);
+                Double res = AppGist.sim(pair1,pair2);
+                if (res >= 0.9) {
+                    result.set(res);
+                    outkey = new IntWritable((int) val.getArray()[960]);
+                    System.out.println("key= " + outkey + "value= " + result);
+                    context.write(outkey, result);
+                }
             }
         }
     }
 
     // Arg 0 -> Input loc
     // Arg 1 -> Output loc
-    // Arg 2 -> x/xxxx.dat file as input
+    // Arg 2 -> x/xxxx file as input
     // Arg 3 -> Group Size
     // Arg 4 -> Result bucket name
     public static void main(String[] args) throws Exception {
