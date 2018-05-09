@@ -1,6 +1,13 @@
-# Finding Similar Images to an Input Image in a Large Dataset with MapReduce
+
+
+![MapReduceAndAws](http://tw.greywool.com/i/nYuyk.png)
+ 
+## Finding Similar Images to an Input Image in a Large Dataset with MapReduce
 
 This project aims to use MapReduce for finding image similarity in large dataset. 
+
+## White Paper
+You can find paper in Paper folder or just simply following [this link](https://github.com/serhangursoy/MapReduceImageSimilarity/blob/SIFTdev/Paper/White_Paper.pdf). You can read our approaches and results in the white paper.
 
 ### Prerequisites
 You need Java for compiling the JAR.
