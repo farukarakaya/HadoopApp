@@ -22,7 +22,7 @@ public class GistCompare {
         String link;
         private int counter = 0;
         private String input;
-        private int GroupCount = 10;
+        private int GroupCount = 5;
         @Override
         protected void setup(Mapper.Context context) throws IOException, InterruptedException {
             input = context.getConfiguration().get("userInputLink");
@@ -70,7 +70,7 @@ public class GistCompare {
                 System.arraycopy(val.getArray(),0,pair1,0,480);
                 System.arraycopy(val.getArray(),480,pair2,0,480);
                 Double res = AppGist.sim(pair1,pair2);
-                if (res >= 0.9) {
+                if (res >= 0.7) {
                     result.set(res);
                     outkey = new IntWritable((int) val.getArray()[960]);
                     System.out.println("key= " + outkey + "value= " + result);

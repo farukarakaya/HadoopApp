@@ -18,8 +18,8 @@ import java.util.List;
 public class S3configuration {
 
     static AWSCredentials credentials = new BasicAWSCredentials(
-            "AKIAI7Z3XZ6CJUU7P2PA",
-            "v7PcCzDvSxJGtMr+xX73ysBqXMeLGSW/1+vubQWY"
+            "AKIAJ3K2RVESIOJZNW3Q",
+            "9P0veFKeNJveVzHxto/D9096uY8xTwxYLwJJl8ve"
     );
     static AmazonS3 s3client = AmazonS3ClientBuilder
             .standard()
