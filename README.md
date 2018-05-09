@@ -37,7 +37,7 @@ Ex GistCompare s3://com-rosettahub-default-xxxxx/MapReduce/input/ s3://com-roset
 
 * **Serhan Gürsoy** - *Architecture Engineer* - [Github](https://github.com/serhangursoy)
 * **Ege Yosunkaya** - *Architecture Engineer* - [Github](https://github.com/egeyosunkaya)
-* **Ömer Faruk Karakaya** - *DevOps Engineer* - [Github](https://github.com/farukarakaya/)
+* **Ömer Faruk Karakaya** - *Architecture Engineer* - [Github](https://github.com/farukarakaya/)
 * **Musab Erayman** - *Architecture Engineer* - [Github](https://github.com/merayman)
 
 See also the list of [contributors](https://github.com/serhangursoy/MapReduceImageSimilarity/contributors) who participated in this project.
