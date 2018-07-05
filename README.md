@@ -33,11 +33,4 @@ Ex GistCompare s3://com-rosettahub-default-xxxxx/MapReduce/input/ s3://com-roset
 * [Hadoop](http://hadoop.apache.org/) - Used for HDFS and general MapReduce Framework
 * [Maven](https://maven.apache.org/) - Dependency Management
 
-## Authors
 
-* **Serhan Gürsoy** - *Architecture Engineer* - [Github](https://github.com/serhangursoy)
-* **Ege Yosunkaya** - *Architecture Engineer* - [Github](https://github.com/egeyosunkaya)
-* **Ömer Faruk Karakaya** - *Architecture Engineer* - [Github](https://github.com/farukarakaya/)
-* **Musab Erayman** - *Architecture Engineer* - [Github](https://github.com/merayman)
-
-See also the list of [contributors](https://github.com/serhangursoy/MapReduceImageSimilarity/contributors) who participated in this project.
